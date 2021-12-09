@@ -32,10 +32,15 @@ package object day8 {
 
   case class Digit(segments: List[Boolean]) {
     def segmentCount: Int = segments.count(b => b)
-    def and(digit: Digit): List[Boolean] =
+
+    private def and(digit: Digit): List[Boolean] =
       segments.zip(digit.segments).map { case (b1, b2) => b1 && b2 }
-    def or(digit: Digit): List[Boolean] =
+
+    private def or(digit: Digit): List[Boolean] =
       segments.zip(digit.segments).map { case (b1, b2) => b1 || b2 }
+
+    def segmentCountInCommon(digit: Digit): Int =
+      and(digit).count(identity)
   }
 
   /** Streams input data. */
